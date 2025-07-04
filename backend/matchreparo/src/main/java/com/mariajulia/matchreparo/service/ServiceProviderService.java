@@ -42,4 +42,11 @@ public class ServiceProviderService {
         return Optional.empty();
     }
 
+    public void delete(Long id) {
+        Optional<ServiceProvider> opt = serviceProviderRepository.findById(id);
+        if (opt.isPresent()) {
+            serviceProviderRepository.delete(opt.get());
+        }
+    }
+
 }

@@ -56,4 +56,10 @@ public class ServiceProviderController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        serviceProviderService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
