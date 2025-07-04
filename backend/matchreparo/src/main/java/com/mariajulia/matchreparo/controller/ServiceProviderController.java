@@ -8,10 +8,9 @@ import com.mariajulia.matchreparo.service.ServiceProviderService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("matchreparo/service-providers")
@@ -31,4 +30,15 @@ public class ServiceProviderController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceProviderResponse);
     }
+
+    @GetMapping
+    public ResponseEntity<List<ServiceProviderResponse>> findAll() {
+        List<ServiceProvider> serviceProviders = serviceProviderService.findAll();
+        List<ServiceProviderResponse> serviceProviderResponses = serviceProviders.stream()
+                .map(ServiceProviderMapper::toServiceProviderResponse)
+                .toList();
+
+        return ResponseEntity.ok(serviceProviderResponses);
+    }
+
 }
