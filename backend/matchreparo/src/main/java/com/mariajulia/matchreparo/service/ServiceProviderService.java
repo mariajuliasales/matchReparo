@@ -28,4 +28,18 @@ public class ServiceProviderService {
         return serviceProviderRepository.findById(id);
     }
 
+    public Optional<ServiceProvider> update(Long id, ServiceProvider serviceProvider) {
+        Optional<ServiceProvider> opt = serviceProviderRepository.findById(id);
+        if (opt.isPresent()) {
+            ServiceProvider existingServiceProvider = opt.get();
+            existingServiceProvider.setName(serviceProvider.getName());
+            existingServiceProvider.setEmail(serviceProvider.getEmail());
+            existingServiceProvider.setPassword(serviceProvider.getPassword());
+            existingServiceProvider.setDescription(serviceProvider.getDescription());
+            existingServiceProvider.setCnpj(serviceProvider.getCnpj());
+            return Optional.of(serviceProviderRepository.save(existingServiceProvider));
+        }
+        return Optional.empty();
+    }
+
 }

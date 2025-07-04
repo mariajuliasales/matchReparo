@@ -48,4 +48,12 @@ public class ServiceProviderController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ServiceProviderResponse> update(@PathVariable Long id, @Valid @RequestBody ServiceProviderRequest serviceProviderRequest) {
+        ServiceProvider serviceProvider = ServiceProviderMapper.toServiceProvider(serviceProviderRequest);
+        return serviceProviderService.update(id, serviceProvider)
+                .map(updatedServiceProvider -> ResponseEntity.ok(ServiceProviderMapper.toServiceProviderResponse(updatedServiceProvider)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
