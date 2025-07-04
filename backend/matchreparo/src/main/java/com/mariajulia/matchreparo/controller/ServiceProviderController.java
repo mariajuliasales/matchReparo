@@ -41,4 +41,11 @@ public class ServiceProviderController {
         return ResponseEntity.ok(serviceProviderResponses);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ServiceProviderResponse> findById(@PathVariable Long id) {
+        return serviceProviderService.findById(id)
+                .map(serviceProvider -> ResponseEntity.ok(ServiceProviderMapper.toServiceProviderResponse(serviceProvider)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
