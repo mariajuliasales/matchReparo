@@ -13,7 +13,7 @@ public class ServiceProviderService {
         this.serviceProviderRepository = serviceProviderRepository;
     }
 
-    public ServiceProvider save(ServiceProvider serviceProvider) {
+    public ServiceProvider create(ServiceProvider serviceProvider) {
         return serviceProviderRepository.save(serviceProvider);
     }
 }
