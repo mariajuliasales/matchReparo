@@ -38,4 +38,11 @@ public class ClientController {
                 .toList();
         return ResponseEntity.ok(clients);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientResponse> findById(@PathVariable Long id) {
+        return clientService.findById(id)
+                .map(client -> ResponseEntity.ok(ClientMapper.toClientResponse(client)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

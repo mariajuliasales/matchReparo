@@ -5,6 +5,7 @@ import com.mariajulia.matchreparo.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -22,4 +23,9 @@ public class ClientService {
     public List<Client> findAll() {
         return clientRepository.findAll();
     }
+
+    public Optional<Client> findById(Long id) {
+        return clientRepository.findById(id);
+    }
+
 }
