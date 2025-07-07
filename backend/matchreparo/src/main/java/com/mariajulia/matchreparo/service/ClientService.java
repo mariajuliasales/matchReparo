@@ -4,6 +4,8 @@ import com.mariajulia.matchreparo.entity.Client;
 import com.mariajulia.matchreparo.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
 
@@ -15,5 +17,9 @@ public class ClientService {
 
     public Client create(Client client) {
         return clientRepository.save(client);
+    }
+
+    public List<Client> findAll() {
+        return clientRepository.findAll();
     }
 }

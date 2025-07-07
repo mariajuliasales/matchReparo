@@ -29,4 +29,13 @@ public class ClientController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(clientResponse);
     }
+
+    @GetMapping
+    public ResponseEntity<List<ClientResponse>> findAll() {
+        List<ClientResponse> clients = clientService.findAll()
+                .stream()
+                .map(ClientMapper::toClientResponse)
+                .toList();
+        return ResponseEntity.ok(clients);
+    }
 }
