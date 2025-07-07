@@ -13,7 +13,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Client saveClient(Client client) {
+    public Client create(Client client) {
         return clientRepository.save(client);
     }
 }

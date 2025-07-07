@@ -2,16 +2,18 @@ package com.mariajulia.matchreparo.controller;
 
 import com.mariajulia.matchreparo.dto.request.ClientRequest;
 import com.mariajulia.matchreparo.dto.response.ClientResponse;
+import com.mariajulia.matchreparo.entity.Client;
 import com.mariajulia.matchreparo.mapper.ClientMapper;
 import com.mariajulia.matchreparo.service.ClientService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/matchreparo/clients")
 public class ClientController {
 
     private final ClientService clientService;
@@ -21,7 +23,10 @@ public class ClientController {
     }
 
     @PostMapping
-    public ClientResponse save(@Valid @RequestBody ClientRequest clientRequest) {
-        return ClientMapper.toClientResponse(clientService.saveClient(ClientMapper.toClient(clientRequest)));
+    public ResponseEntity<ClientResponse> create(@Valid @RequestBody ClientRequest clientRequest){
+        Client client = clientService.create(ClientMapper.toClient(clientRequest));
+        ClientResponse clientResponse = ClientMapper.toClientResponse(client);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientResponse);
     }
 }
