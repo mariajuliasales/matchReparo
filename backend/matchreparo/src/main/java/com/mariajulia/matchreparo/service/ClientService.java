@@ -28,4 +28,19 @@ public class ClientService {
         return clientRepository.findById(id);
     }
 
+    public Optional<Client> update(Long id, Client client) {
+        Optional<Client> opt = clientRepository.findById(id);
+        if (opt.isPresent()) {
+            Client existingClient = opt.get();
+            existingClient.setName(client.getName());
+            existingClient.setEmail(client.getEmail());
+            existingClient.setPassword(client.getPassword());
+            existingClient.setDescription(client.getDescription());
+            existingClient.setCpf(client.getCpf());
+            existingClient.setDataBirth(client.getDataBirth());
+            return Optional.of(clientRepository.save(existingClient));
+        }
+        return Optional.empty();
+    }
+
 }

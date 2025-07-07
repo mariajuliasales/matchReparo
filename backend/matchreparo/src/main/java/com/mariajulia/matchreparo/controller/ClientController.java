@@ -45,4 +45,12 @@ public class ClientController {
                 .map(client -> ResponseEntity.ok(ClientMapper.toClientResponse(client)))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientResponse> update(@PathVariable Long id, @Valid @RequestBody ClientRequest clientRequest) {
+        return clientService.update(id, ClientMapper.toClient(clientRequest))
+                .map(client -> ResponseEntity.ok(ClientMapper.toClientResponse(client)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
