@@ -43,4 +43,11 @@ public class ClientService {
         return Optional.empty();
     }
 
+    public void delete(Long id) {
+        Optional<Client> opt = clientRepository.findById(id);
+        if (opt.isPresent()) {
+            clientRepository.delete(opt.get());
+        }
+    }
+
 }
